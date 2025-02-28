@@ -1,4 +1,34 @@
----
+curl -X POST \
+  -F 'name="My Test Website Custom Audience"' \
+  -F 'rule={
+       "inclusions": {
+         "operator": "or",
+         "rules": [
+           {
+             "event_sources": [
+               {
+                 "id": "<APP_ID>",
+                 "type": "app"
+               }
+             ],
+             "retention_seconds": 8400,
+             "filter": {
+               "operator": "and",
+               "filters": [
+                 {
+                   "field": "event",
+                   "operator": "eq",
+                   "value": "fb_mobile_purchase"
+                 }
+               ]
+             }
+           }
+         ]
+       }
+     }' \
+  -F 'prefill=1' \
+  -F 'access_token=<ACCESS_TOKEN>' \
+  https://graph.facebook.com/v22.0/act_<AD_ACCOUNT_ID>/customaudiences
 title: Understanding GitHub Code Search syntax
 shortTitle: Code search syntax
 intro: 'You can build search queries for the results you want with specialized code qualifiers, regular expressions, and boolean operations.'
